@@ -12,13 +12,13 @@ async function connectToRabbitMQ() {
     console.log('[x] Connecté à RabbitMQ');
     return { connection, channel };
   } catch (error) {
-    console.error('[!] Impossible de se connecter à RabbitMQ. Nouvelle tentative dans 5 secondes...', error);
+    console.error('[!] Impossible de se connecter à RabbitMQ. Nouvelle tentative dans 5 secondes', error);
     await new Promise((resolve) => setTimeout(resolve, 5000));
     return connectToRabbitMQ();
   }
 }
 
-// Fonction pour envoyer un message structuré à RabbitMQ
+// Fonction pour envoyer un message  à RabbitMQ
 async function sendMessage(title: string, message: string, type: string = 'info') {
   notificationCounter += 1;
 
@@ -26,7 +26,7 @@ async function sendMessage(title: string, message: string, type: string = 'info'
     id: notificationCounter,
     title,
     message,
-    type, // Type de notification (info, warning...)
+    type, // Type de notification [info par exemple]
   };
 
   try {
@@ -55,24 +55,13 @@ async function routineMessage() {
   }
 }
 
-// Routine pour envoyer des notifications spéciales (type warning)
-async function routineAdditional() {
-  while (true) {
-    await sendMessage(
-      'Notification d\'avertissement',
-      'Ceci est un message spécial d\'avertissement.',
-      'warning',
-    );
-    await new Promise((resolve) => setTimeout(resolve, 10000));
-  }
-}
+
 
 // Point d'entrée principal
 async function main() {
   try {
     console.log('[x] Démarrage des routines...');
     routineMessage();
-    routineAdditional();
   } catch (error) {
     console.error('[!] Erreur dans le producteur :', error);
   }

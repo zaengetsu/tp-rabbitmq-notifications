@@ -10,7 +10,7 @@ interface NotificationProps {
   id: number;
   title: string;
   message: string;
-  type?: 'info' | 'warning';
+  type?: 'info' | 'warning' ;
   onClose?: () => void;
 }
 
@@ -38,9 +38,10 @@ export default function Notification({
     warning: {
       bg: 'bg-red-100',
       text: 'text-red-900',
-      icon: <ExclamationTriangleIcon className="h-6 w-6 text-red-500" />,
+      icon: <ExclamationTriangleIcon className="h-6 w-6 text-purple-500" />,
       numberColor: 'text-red-500', // Rouge pour les notifications warning
     },
+
   };
 
   const notificationStyle = colors[type] || colors.info;
