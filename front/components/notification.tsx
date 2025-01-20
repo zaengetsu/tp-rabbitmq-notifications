@@ -5,12 +5,13 @@ import { Transition } from '@headlessui/react';
 import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import React from 'react';
+import { error } from 'console';
 
 interface NotificationProps {
   id: number;
   title: string;
   message: string;
-  type?: 'info' | 'warning';
+  type?: 'info' | 'warning' | 'error';
   onClose?: () => void;
 }
 
@@ -33,14 +34,21 @@ export default function Notification({
       bg: 'bg-blue-100',
       text: 'text-blue-900',
       icon: <CheckCircleIcon className="h-6 w-6 text-blue-500" />,
-      numberColor: 'text-black', // Noir pour les notifications info
+      numberColor: 'text-black', 
     },
     warning: {
       bg: 'bg-red-100',
       text: 'text-red-900',
       icon: <ExclamationTriangleIcon className="h-6 w-6 text-red-500" />,
-      numberColor: 'text-red-500', // Rouge pour les notifications warning
+      numberColor: 'text-red-500',
     },
+    error: {
+      bg: 'bg-green-100',
+      text: 'text-green-900',
+      icon: <ExclamationTriangleIcon className="h-6 w-6 text-green-500" />,
+      numberColor: 'text-green-500', 
+    },
+
   };
 
   const notificationStyle = colors[type] || colors.info;
@@ -75,3 +83,8 @@ export default function Notification({
     </Transition>
   );
 }
+
+
+
+
+

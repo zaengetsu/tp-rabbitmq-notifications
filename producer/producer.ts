@@ -67,12 +67,25 @@ async function routineAdditional() {
   }
 }
 
+// Routine pour envoyer des notifications spéciales (type warning)
+async function routineError() {
+  while (true) {
+    await sendMessage(
+      "Notification d'erreur",
+      "Ceci est un message spécial d'erreur",
+      'error',
+    );
+    await new Promise((resolve) => setTimeout(resolve, 15000));
+  }
+}
+
 // Point d'entrée principal
 async function main() {
   try {
     console.log('[x] Démarrage des routines...');
     routineMessage();
     routineAdditional();
+    routineError();
   } catch (error) {
     console.error('[!] Erreur dans le producteur :', error);
   }
